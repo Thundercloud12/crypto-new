@@ -1,4 +1,3 @@
-// src/pages/Trades.tsx
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { openBinanceSocket } from '../api/binanceSocket';
