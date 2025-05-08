@@ -1,4 +1,3 @@
-// src/app/store.ts
 import { configureStore } from '@reduxjs/toolkit';
 import cryptoReducer from '../store/slices/CryptoSlice';
 import binanceReducer from '../store/slices/binanceSlice';
@@ -10,11 +9,11 @@ export const store = configureStore({
   },
 });
 
-// Types
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-// Typed hooks
+
 import {
   useDispatch as useReduxDispatch,
   useSelector as useReduxSelector,
