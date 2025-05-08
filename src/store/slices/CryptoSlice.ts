@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// 1) Define interfaces for Coin and Thunk params
+
 export interface Coin {
   id: string;
   symbol: string;
@@ -12,7 +12,7 @@ export interface Coin {
   market_cap: number;
   market_cap_rank: number;
   total_volume: number;
-  [key: string]: any; // for any extra fields you might use
+  [key: string]: any; 
 }
 
 export interface FetchCoinsParams {
@@ -21,7 +21,7 @@ export interface FetchCoinsParams {
   page?: number;
 }
 
-// 2) Async thunk to fetch market data from CoinGecko
+
 export const fetchCoins = createAsyncThunk<
   Coin[],                    // return type of payload
   FetchCoinsParams | void,   // argument type
@@ -54,21 +54,21 @@ export const fetchCoins = createAsyncThunk<
   }
 );
 
-// 3) Slice state interface
+
 interface CryptoState {
   coins: Coin[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
-// 4) Initial state
+
 const initialState: CryptoState = {
   coins: [],
   status: 'idle',
   error: null,
 };
 
-// 5) Create slice
+
 const cryptoSlice = createSlice({
   name: 'crypto',
   initialState,
