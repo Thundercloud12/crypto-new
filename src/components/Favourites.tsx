@@ -1,4 +1,3 @@
-// src/pages/Favourites.tsx
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../store/store';
 import { Link } from 'react-router-dom';
