@@ -79,36 +79,7 @@ A real-time cryptocurrency dashboard built with React and WebSockets, featuring 
 
    Navigate to `http://localhost:3000` in your web browser to view the dashboard.
 
----
 
-## ⚙️ Project Structure
-
-```
-crypto-dashboard/
-├── public/
-├── src/
-│   ├── api/
-│   │   └── binanceSocket.ts
-│   ├── components/
-│   │   ├── CryptoCard.tsx
-│   │   └── SearchBar.tsx
-│   ├── pages/
-│   │   └── Home.tsx
-│   ├── store/
-│   │   ├── slices/
-│   │   │   ├── binanceSlice.ts
-│   │   │   └── cryptoSlice.ts
-│   │   └── store.ts
-│   ├── styles/
-│   │   └── tailwind.css
-│   └── App.tsx
-├── tailwind.config.js
-├── postcss.config.js
-├── package.json
-└── README.md
-```
-
----
 
 ## 🧪 Features
 
