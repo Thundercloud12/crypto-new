@@ -1,4 +1,3 @@
-// src/api/binanceSocket.ts
 import type { AppDispatch } from '../store/store';
 import {
   WS_CONNECT,
