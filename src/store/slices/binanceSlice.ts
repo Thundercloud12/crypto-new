@@ -1,16 +1,15 @@
-// src/store/slices/binanceSlice.ts
 import { createSlice} from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 export interface BinanceTrade {
-  s: string;    // Symbol, e.g. "BTCUSDT"
-  p: string;    // Price as string
-  q: string;    // Quantity as string
+  s: string;    
+  p: string;    
+  q: string;    
   sparkline?:number[]
 }
 
 interface BinanceState {
   trades: Record<string, BinanceTrade>;
-  sparklines: Record<string, number[]>;   // <— new: price buffers
+  sparklines: Record<string, number[]>;   
   status: 'idle' | 'connecting' | 'connected' | 'disconnected';
 }
 
