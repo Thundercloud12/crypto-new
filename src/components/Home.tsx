@@ -1,4 +1,3 @@
-// src/pages/Home.tsx
 import { useEffect, useState, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { fetchCoins } from '../store/slices/CryptoSlice';
