@@ -1,8 +1,8 @@
 // src/pages/Trades.tsx
 import { useEffect, useMemo, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../src/store/store';
-import { openBinanceSocket } from '../src/api/binanceSocket';
-import { WS_DISCONNECT } from '../src/store/slices/binanceSlice';
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { openBinanceSocket } from '../api/binanceSocket';
+import { WS_DISCONNECT } from '../store/slices/binanceSlice';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
 import shallowEqual from 'shallowequal';
 

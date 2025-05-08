@@ -1,38 +1,40 @@
 // src/pages/Home.tsx
-import { useEffect, useState, useRef, useMemo } from 'react';
-import { useAppDispatch, useAppSelector } from '../src/store/store';
-import { fetchCoins } from '../src/store/slices/CryptoSlice';
-import { openBinanceSocket } from '../src/api/binanceSocket';
-import { WS_DISCONNECT } from '../src/store/slices/binanceSlice';
+import { useEffect, useState, useMemo } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { fetchCoins } from '../store/slices/CryptoSlice';
+import { CiStar } from "react-icons/ci";
+import { MdOutlineStar } from "react-icons/md";
 
-
-const MAX_POINTS = 7;
 const ROWS_PER_PAGE = 5;
 
 export default function Home() {
   const dispatch = useAppDispatch();
   const { coins, status } = useAppSelector((s) => s.crypto);
 
-
-  // Search & filter state
   const [search, setSearch] = useState('');
   const [moverFilter, setMoverFilter] = useState<'all' | 'gainers' | 'losers'>('all');
-
-  // Pagination state
   const [page, setPage] = useState(1);
-  const buffersRef = useRef<Record<string, number[]>>({});
-  const [buffers, setBuffers] = useState<Record<string, number[]>>({});
-  buffersRef.current = buffers;
+  const [favourites, setFavourites] = useState<string[]>(() => {
+    const stored = localStorage.getItem('favourites');
+    return stored ? JSON.parse(stored) : [];
+  });
 
-  // Fetch REST once
   useEffect(() => {
     dispatch(fetchCoins());
   }, [dispatch]);
 
+  useEffect(() => {
+    localStorage.setItem('favourites', JSON.stringify(favourites));
+  }, [favourites]);
 
-  
+  const toggleFavourite = (symbol: string) => {
+    setFavourites((prev) =>
+      prev.includes(symbol)
+        ? prev.filter((s) => s !== symbol)
+        : [...prev, symbol]
+    );
+  };
 
-  // Filter & sort coins
   const filtered = useMemo(() => {
     let arr = coins.filter(c =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -58,6 +60,7 @@ export default function Home() {
 
   return (
     <div className="p-4 space-y-6">
+
       {/* controls */}
       <div className="flex flex-col md:flex-row items-center gap-4">
         <input
@@ -86,7 +89,7 @@ export default function Home() {
               <tr>
                 <th>Coin</th><th>Name</th>
                 <th>24h Δ</th><th>24h High</th>
-                <th>24h Low</th><th>Price</th>
+                <th>24h Low</th><th>Price</th><th>Fav</th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +113,14 @@ export default function Home() {
                     <td>${coin.high_24h.toLocaleString()}</td>
                     <td>${coin.low_24h.toLocaleString()}</td>
                     <td>${coin.current_price.toLocaleString()}</td>
-  
+                    <td>
+                      <button
+                        className={`btn btn-sm`}
+                        onClick={() => toggleFavourite(coin.symbol)}
+                      >
+                        {favourites.includes(coin.symbol) ?  <MdOutlineStar /> :  <CiStar />}
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
